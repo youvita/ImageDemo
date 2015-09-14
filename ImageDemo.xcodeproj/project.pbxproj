@@ -31,7 +31,6 @@
 		3EBFF2E91B74942300A4AADD /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBFF2D71B74942300A4AADD /* UIImageView+HighlightedWebCache.m */; };
 		3EBFF2EA1B74942300A4AADD /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBFF2D91B74942300A4AADD /* UIImageView+WebCache.m */; };
 		3EBFF2EB1B74942300A4AADD /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBFF2DB1B74942300A4AADD /* UIView+WebCacheOperation.m */; };
-		3EBFF2EE1B74A59D00A4AADD /* SlideImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBFF2ED1B74A59D00A4AADD /* SlideImage.swift */; };
 		3EBFF2F11B74A85800A4AADD /* UIImageCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBFF2F01B74A85800A4AADD /* UIImageCollectionView.m */; };
 		3EFDF3781B79B76F008990E1 /* none_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFDF3771B79B76F008990E1 /* none_photo.png */; };
 /* End PBXBuildFile section */
@@ -96,7 +95,6 @@
 		3EBFF2DA1B74942300A4AADD /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		3EBFF2DB1B74942300A4AADD /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		3EBFF2EC1B74A59C00A4AADD /* ImageDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImageDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		3EBFF2ED1B74A59D00A4AADD /* SlideImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideImage.swift; sourceTree = "<group>"; };
 		3EBFF2EF1B74A85800A4AADD /* UIImageCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageCollectionView.h; sourceTree = "<group>"; };
 		3EBFF2F01B74A85800A4AADD /* UIImageCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageCollectionView.m; sourceTree = "<group>"; };
 		3EFDF3771B79B76F008990E1 /* none_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = none_photo.png; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				3EFDF3771B79B76F008990E1 /* none_photo.png */,
-				3EBFF2ED1B74A59D00A4AADD /* SlideImage.swift */,
 				3EBFF2BA1B74942300A4AADD /* SDWebImage */,
 				3EBFF2981B7491C200A4AADD /* AppDelegate.h */,
 				3EBFF2991B7491C200A4AADD /* AppDelegate.m */,
@@ -337,7 +334,6 @@
 				3EBFF2E81B74942300A4AADD /* UIImage+WebP.m in Sources */,
 				3EBFF2EB1B74942300A4AADD /* UIView+WebCacheOperation.m in Sources */,
 				3EBFF2DE1B74942300A4AADD /* SDImageCache.m in Sources */,
-				3EBFF2EE1B74A59D00A4AADD /* SlideImage.swift in Sources */,
 				3EBFF29D1B7491C200A4AADD /* ViewController.m in Sources */,
 				3EBFF2DC1B74942300A4AADD /* MKAnnotationView+WebCache.m in Sources */,
 				3EBFF2E01B74942300A4AADD /* SDWebImageDecoder.m in Sources */,

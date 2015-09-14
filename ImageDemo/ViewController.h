@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIImageCollectionView.h"
 #import "ImageDemo-Swift.h"
-#import "ExtendedDevice.h"
 
 @interface ViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 

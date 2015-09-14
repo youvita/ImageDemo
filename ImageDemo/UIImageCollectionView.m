@@ -16,13 +16,14 @@
     float           currentPage;
     float           mergingW;
     float           mergingX;
+    BOOL            pageChanged;
 }
 
 @property (nonatomic, strong)UICollectionView* collectionView;
 @property (nonatomic, assign)UIView* tagetView;
 @property (nonatomic, assign)NSArray* urlImages;
 @property (nonatomic, assign)UIColor* backgroundColor;
-@property (nonatomic, copy)UIImage* placeholerImage;
+@property (nonatomic, copy)UIImage* placeholderImage;
 @property (nonatomic, assign)BOOL merging;
 @property (nonatomic, assign)BOOL pageFooter;
 @property (nonatomic, assign)BOOL animate;
@@ -53,7 +54,7 @@
         self.tagetView           = tagetView;
         self.urlImages           = urlImages;
         self.backgroundColor     = color;
-        self.placeholerImage     = image;
+        self.placeholderImage    = image;
         self.pageFooter          = footer;
         self.animate             = animate;
         [self setUpCollectionView:merging];
@@ -78,6 +79,7 @@
     page.font       = [UIFont fontWithName:@"Helvetica" size:12.0];
     page.textColor  = [UIColor whiteColor];
     [self.tagetView addSubview:page];
+
 }
 
 -(void)setUpCollectionView:(BOOL)merging{
@@ -100,8 +102,9 @@
     if (!self.pageFooter) {
         /* add page number */
         [self addFooterPageNumber];
+        pageChanged = YES;
     }
-    
+   
     [self checkMerging:merging];
     isScrolling = YES;
     
@@ -116,14 +119,14 @@
         }];
     /////////////////////////////////////////////////////////////////////////
     }
-
+    
 }
 
 -(void)checkWithScrollHandler:(void(^)(NSIndexPath*,NSInteger))block{
     self.scrollHandler = block;
 }
 
--(void)updatePageNumber{
+- (void)updatePageNumber{
     if (!self.pageFooter) {
         page.text = [NSString stringWithFormat:@"Page:%d/%lu",(indexPage.item + 1),(unsigned long)[self.urlImages count]];
     }
@@ -145,23 +148,28 @@
         }
     }
     
-    /* add wating loading */
+    /* add waiting loading */
     UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.center = self.collectionView.center;
     [indicator startAnimating];
     [self.tagetView addSubview:indicator];
-
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         //Background Thread
         indexPage = indexPath; // get indexPath for page
         NSURL* url = [NSURL URLWithString:self.urlImages[indexPath.item]];
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.collectionView.frame.origin.x - 10 + mergingX, 0.0,self.collectionView.frame.size.width - mergingW, self.collectionView.frame.size.height)];
-        [imageView sd_setImageWithURL:url placeholderImage:self.placeholerImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imageView sd_setImageWithURL:url placeholderImage:self.placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [indicator removeFromSuperview];
+           
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
             //Run UI Updates
+            if (pageChanged) {
+                [self updatePageNumber];
+            }
+            
             [cell.contentView addSubview:imageView];
         });
     });
@@ -186,17 +194,17 @@
 #pragma mark - ScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
    isScrolling = NO;
+   pageChanged = NO;
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (isScrolling) {return;}
     
-    for (int i = 0; i<[contentSizePage count]; i++){
         if (scrollView.contentOffset.x > currentPage) {
             /* Right */
-            if (scrollView.contentOffset.x == (CGFloat)[[contentSizePage objectAtIndex:i]floatValue]) {
+            if (scrollView.contentOffset.x == (CGFloat)[[contentSizePage objectAtIndex:indexPage.item]floatValue]) {
                 if (scrollView.contentOffset.x != currentPage) {
-                    currentPage = (CGFloat)[[contentSizePage objectAtIndex:i]floatValue];
+                    currentPage = (CGFloat)[[contentSizePage objectAtIndex:indexPage.item]floatValue];
                     [[ImageSharedManager sharedImage] setIndexPathItem:indexPage.item];
                     self.scrollHandler(indexPage,self.collectionView.tag);
                     [self updatePageNumber];
@@ -204,16 +212,16 @@
             }
         }else{
             /* Left */
-            if (scrollView.contentOffset.x == (CGFloat)[[contentSizePage objectAtIndex:i]floatValue]) {
-                if (scrollView.contentOffset.x != currentPage) {
-                    currentPage = (CGFloat)[[contentSizePage objectAtIndex:i]floatValue];
+            if (scrollView.contentOffset.x == (CGFloat)[[contentSizePage objectAtIndex:indexPage.item]floatValue]) {
+                if (scrollView.contentOffset.x != currentPage || scrollView.contentOffset.x == currentPage) {
+                    currentPage = (CGFloat)[[contentSizePage objectAtIndex:indexPage.item]floatValue];
                     [[ImageSharedManager sharedImage] setIndexPathItem:indexPage.item];
                     self.scrollHandler(indexPage,self.collectionView.tag);
                     [self updatePageNumber];
                 }
             }
         }
-    }
+
 }
 
 @end

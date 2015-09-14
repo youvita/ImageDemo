@@ -40,5 +40,6 @@
                             withAnimation:(BOOL)animate;
 
 -(void)checkWithScrollHandler:(void(^)(NSIndexPath*,NSInteger))block;
+-(void)updatePageNumber;
 
 @end

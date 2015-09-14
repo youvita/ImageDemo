@@ -16,5 +16,5 @@
 + (ImageSharedManager *)sharedImage;
 - (NSMutableArray*)getSelectedImagesArray:(NSIndexPath*)indexPath withRow:(NSInteger)rowPath;
 - (void)setIndexPathItem:(int)item;
-    
+
 @end

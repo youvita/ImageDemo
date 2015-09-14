@@ -32,7 +32,6 @@
                 ];
     
     itemsData = @[@"love cambodian",@"beautiful image",@"backgroud love",@"like the images",@"a lot of place",@"good memory",@"free dom",@"love love"];
-    
     imagesTemp = [[NSMutableArray alloc] init];
     
     /* add footer view */
@@ -53,7 +52,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
         
-        UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 0.0f;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
@@ -73,10 +72,6 @@
         content.tag = 1000;
         [cell.contentView addSubview:content];
 
-        /* Using swift code */
-//        UIScrollView* scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x + 10, 10, self.view.frame.size.width - 20, 150)];
-//        self.slideImage = [SlideImage attactToScrollView:scroll images:itemsUrl tagetView:cell.contentView backgroudScrollView:[UIColor grayColor] merging:YES hidePageFooter:NO];
-
     }else{
 
         /* Remove old object */
@@ -87,7 +82,7 @@
         }
 
         /* Reuse cell init new object */
-        UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 0.0f;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
@@ -100,9 +95,8 @@
                                                         placeholderImage:[UIImage imageNamed:@"none_photo.png"]
                                                                  merging:YES
                                                        andHidePageFooter:NO
-                                                           withAnimation:NO];
-        
-       
+                                                           withAnimation:YES];
+
     }
     
     /* Slide Image Event */
